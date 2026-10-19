@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
         dz=QHBoxLayout()
         dz.addWidget(label('Stick dead zone','muted'))
         self.deadzone=QDoubleSpinBox()
-        self.deadzone.setRange(0,.8)
+        self.deadzone.setRange(0,.95)
         self.deadzone.setSingleStep(.01)
         self.deadzone.setValue(self.p['deadzone'])
         self.deadzone.valueChanged.connect(self.dz_changed)
@@ -571,7 +571,8 @@ class MainWindow(QMainWindow):
                 if not isinstance(saved,dict):raise ValueError('Invalid saved selection')
                 relative=saved.get('last_profile')
                 path=(ROOT/'profiles'/relative).resolve()
-                if path.is_relative_to((ROOT/'profiles').resolve()) and path.is_file():self.load_path(path,save_pending=False);return
+                if path.is_relative_to((ROOT/'profiles').resolve()) and path.is_file():
+                    if self.load_path(path,save_pending=False):return
         except (OSError,ValueError,TypeError):pass
         entries=list_presets(ROOT/'profiles')
         if entries:self.load_path(max(entries,key=lambda entry:entry[1].stat().st_mtime_ns)[1],save_pending=False)
@@ -580,7 +581,10 @@ class MainWindow(QMainWindow):
         p=upgrade_legacy_action_labels(p)
         self.p=p;self.current_path=path
         self.name.setText(p['name']);self.mode.setCurrentText(p.get('mode','Xbox gamepad'))
-        self.deadzone.setValue(p['deadzone']);self.refresh();self.reload_profiles()
+        blocked=self.deadzone.blockSignals(True)
+        try:self.deadzone.setValue(p['deadzone'])
+        finally:self.deadzone.blockSignals(blocked)
+        self.refresh();self.reload_profiles()
         self._baseline=self.profile_signature();self.notice.setText(message);self.remember_profile(path)
 
     def load_path(self,path,save_pending=True):

@@ -63,7 +63,7 @@ def validate_profile(p):
         roles=p['target_roles']
         if not isinstance(roles,dict) or any(k not in (*AXES,*BUTTONS) or not isinstance(v,str) or len(v)>80 for k,v in roles.items()):raise ValueError('Invalid action labels')
     dz=p.get('deadzone')
-    if not isinstance(dz,(int,float)) or not math.isfinite(dz) or not 0<=dz<.95:raise ValueError('Invalid dead zone')
+    if not isinstance(dz,(int,float)) or not math.isfinite(dz) or not 0<=dz<=.95:raise ValueError('Invalid dead zone')
     def source(s):
         if not isinstance(s,dict) or s.get('kind') not in ('axis','button','hat'):raise ValueError('Invalid input source')
         if type(s.get('index')) is not int or not 0<=s['index']<128:raise ValueError('Input index out of range')
