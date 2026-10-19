@@ -7,6 +7,13 @@ from PySide6.QtWidgets import (QWidget,QDialog,QVBoxLayout,QHBoxLayout,QLabel,QC
 from core import source_value
 from overlay_bindings import front_marker_slots
 
+THUMBWHEEL_SETUP = (
+    "On the flightstick's OLED, set Trim Wheel → Response → Digital Buttons. "
+    "Then use Learn from Flightstick for wheel up and wheel down separately, "
+    "assign each direction, and save your preset. "
+    "Pressing the wheel is a separate input: Button 15."
+)
+
 def source_text(s):
     if not s:return 'Unassigned'
     text=f"{s['kind'].title()} {s['index']+1}"
@@ -35,6 +42,7 @@ class SourceDialog(QDialog):
         for name,w in [('Input type',self.kind),('Input number',self.index),('Axis range',self.range),('Hat direction',self.direction),('',self.invert)]:f.addRow(name,w)
         l.addLayout(f)
         note=QLabel('signed: centered stick  •  full: entire lever travel\npositive / negative: one half of a centered axis');note.setWordWrap(True);l.addWidget(note)
+        wheel_note=QLabel('Thumbwheel: '+THUMBWHEEL_SETUP);wheel_note.setWordWrap(True);wheel_note.setMaximumWidth(560);l.addWidget(wheel_note)
         self.notice=QLabel('Ready to learn');self.notice.setWordWrap(True);l.addWidget(self.notice)
         b=QPushButton('Learn from Flightstick');b.clicked.connect(self.learn);l.addWidget(b)
         buttons=QDialogButtonBox(QDialogButtonBox.StandardButton.Ok|QDialogButtonBox.StandardButton.Cancel)

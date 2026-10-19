@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBo
 from core import default_profile,validate_profile,evaluate,source_value,AXES,BUTTONS
 from input_device import Flightstick
 from engine import Engine
-from widgets import ControllerView,AxisMeter,ButtonMonitor,SourceDialog,source_text,REGIONS
+from widgets import ControllerView,AxisMeter,ButtonMonitor,SourceDialog,source_text,REGIONS,THUMBWHEEL_SETUP
 from calibration import apply_calibration,clear_unverified_levers
 from calibration_dialog import CalibrationDialog
 from macro_dialog import MacroDialog
@@ -300,7 +300,9 @@ class MainWindow(QMainWindow):
         tools.addAction('Identify / calibrate controls…',self.identify_controls)
         tools.addAction('Windows controller test',lambda:subprocess.Popen(['control.exe','joy.cpl']))
         tools.addAction('Driver setup / dependencies…',self.show_dependencies)
-        self.menuBar().addMenu('&Help').addAction('Game setup / binding guide…',self.show_game_guide)
+        help_menu=self.menuBar().addMenu('&Help')
+        help_menu.addAction('Game setup / binding guide…',self.show_game_guide)
+        help_menu.addAction('Thumbwheel setup…',lambda:QMessageBox.information(self,'Thumbwheel digital inputs',THUMBWHEEL_SETUP))
 
     def rename_profile(self):
         name,ok=QInputDialog.getText(self,'Rename preset','Preset name:',text=self.name.text())
@@ -645,6 +647,7 @@ class MainWindow(QMainWindow):
         steps=label((entry['setup'] if entry else 'Configure this custom game using its own controller settings.')+
             '\nStart Xbox output and confirm the virtual controller in Windows before binding in-game. The app does not import or overwrite game configuration files.','muted')
         steps.setWordWrap(True);layout.addWidget(steps)
+        wheel=label('Thumbwheel setup: '+THUMBWHEEL_SETUP,'notice');wheel.setWordWrap(True);layout.addWidget(wheel)
         table=QTableWidget(0,3);table.setHorizontalHeaderLabels(['Virtual output','V1 input','Suggested in-game action'])
         table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
