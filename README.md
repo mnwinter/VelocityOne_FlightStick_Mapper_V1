@@ -2,11 +2,11 @@
 
 **An independent Windows mapper for the original Turtle Beach VelocityOne Flightstick V1.** Map physical controls to a virtual Xbox gamepad or keyboard/mouse, see live inputs, and save setups by game. No x360ce or ViGEm.
 
-[Download preview v0.1.2](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.2) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
+[Download preview v0.1.3](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.3) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
 
 ![Actual running mapper with the V1 connected and Ace Combat 8 preset loaded](docs/assets/workspace-live.jpg)
 
-Actual screenshot of the running app with the original V1 connected. v0.1.2 restores the real V1 controller images.
+Actual screenshot of the running app with the original V1 connected. v0.1.3 restores the real V1 controller images.
 
 ## What it does
 
@@ -16,7 +16,7 @@ Actual screenshot of the running app with the original V1 connected. v0.1.2 rest
 - Multiple physical inputs for each digital gamepad output: any listed input activates it.
 - Macros with ordered steps, simultaneous outputs, hold durations, delays, repeat count, while-held and toggle modes.
 - Separate keyboard/mouse output. Driver setup and dependency notices are included; no Python installation is needed for release binaries.
-- Black interface, native dark Windows title bar, and compact menu-based tools.
+- Black two-pane workspace: all mapping controls on the left, real V1 image on the right, compact raw monitor below. Native dark Windows title bar and menu-based tools.
 
 **Game testing: Ace Combat 8 is the only game tested so far.** All other game presets are untested starting points. This is not a universal compatibility guarantee. Original V1 only; V2/Flightdeck/HOTAS models are not claimed compatible.
 
@@ -28,7 +28,7 @@ The download includes Python, Qt/PySide6, pygame/SDL, VIIPER and the USBIP insta
 
 ## Quick start
 
-1. Download `VelocityOneMapper-v0.1.2-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
+1. Download `VelocityOneMapper-v0.1.3-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
 2. Connect the original stick in PC mode. Close other controller mappers to avoid duplicate input.
 3. Open **Tools → Driver setup / dependencies** for first-time virtual-controller setup.
 4. Select **Game**, then a starter or saved **Preset**. The app loads without autosaving over presets.
@@ -81,7 +81,7 @@ The fetch script pins hashes and checks Authenticode signatures; it never instal
 
 ## License and independence
 
-**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. The real V1 controller images are restored in v0.1.2 with redistribution permission confirmed by the project owner. Third-party images retain their copyright and are not licensed under the application GPL.
+**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. The real V1 controller images are restored in v0.1.3 with redistribution permission confirmed by the project owner. Third-party images retain their copyright and are not licensed under the application GPL.
 
 Turtle Beach, VelocityOne and Xbox identify relevant hardware/interfaces and remain their owners' trademarks. This project is not endorsed by or affiliated with those manufacturers.
 
