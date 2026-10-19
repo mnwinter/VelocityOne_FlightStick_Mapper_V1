@@ -3,12 +3,12 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock,patch
 os.environ.setdefault('QT_QPA_PLATFORM','offscreen')
-from PySide6.QtWidgets import QApplication,QWidget,QMessageBox,QLineEdit
+from PySide6.QtWidgets import QApplication,QWidget,QMessageBox,QLineEdit,QDoubleSpinBox
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtCore import QTimer,QCoreApplication,QEvent
 from shiboken6 import isValid
 import app
-from core import default_profile
+from core import default_profile,validate_profile
 from game_presets import make_starter,upgrade_legacy_action_labels
 from profile_library import save_preset,list_presets
 from widgets import SourceDialog
@@ -16,6 +16,19 @@ from widgets import SourceDialog
 class ProfileLifecycleTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.qt=QApplication.instance() or QApplication([])
+ def test_activation_preserves_high_deadzone_without_edit_signals(self):
+  for value in (.9,.949,.95):
+   p=default_profile();p['deadzone']=value;validate_profile(p)
+   spin=QDoubleSpinBox();spin.setRange(0,.95)
+   changed=MagicMock();spin.valueChanged.connect(changed)
+   fake=SimpleNamespace(deadzone=spin,name=QLineEdit(),mode=MagicMock(),refresh=MagicMock(),reload_profiles=MagicMock(),profile_signature=MagicMock(return_value='baseline'),notice=MagicMock(),remember_profile=MagicMock())
+   app.MainWindow.activate_profile(fake,p,'Loaded')
+   self.assertEqual(fake.p['deadzone'],value);changed.assert_not_called()
+   self.assertFalse(spin.signalsBlocked())
+   self.assertEqual(fake._baseline,'baseline')
+ def test_deadzone_editor_maximum_is_valid(self):
+  p=default_profile();p['deadzone']=.95
+  self.assertEqual(validate_profile(p)['deadzone'],.95)
  def test_close_dirty_cancel_and_failed_save_preserve_window(self):
   for answer,saved in ((QMessageBox.StandardButton.Cancel,True),(QMessageBox.StandardButton.Save,False)):
    fake=SimpleNamespace(closing=False,has_pending_changes=lambda:True,save_profile=MagicMock(return_value=saved),timer=MagicMock(),engine=MagicMock(),device=MagicMock())

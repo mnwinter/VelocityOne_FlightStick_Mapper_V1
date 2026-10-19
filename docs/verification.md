@@ -52,4 +52,4 @@ Before a release is described as broadly qualified, exercise the actual release 
 
 ## Public screenshot
 
-The README and project page now use `assets/workspace-live.jpg`, an unedited native screenshot of the running development app with the original V1 connected, the owner’s Ace Combat 8 preset loaded and output active. It was captured from the actual window, without mocked inputs. This development build contains photo artwork; the published v0.1.0 download uses schematic artwork. The earlier offscreen verification render above remains separately identified.
+The README and project page now use `assets/workspace-live.jpg`, an unedited native screenshot of the running development app with the original V1 connected, the owner's Ace Combat 8 preset loaded and output active. It was captured from the actual window, without mocked inputs. This development build contains photo artwork; the published v0.1.0 download uses schematic artwork. The earlier offscreen verification render above remains separately identified.
