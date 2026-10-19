@@ -4,7 +4,9 @@
 
 [Download preview v0.1.0](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.0) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
 
-![Mapper workspace with original V1 schematic and live output meters](docs/assets/workspace.png)
+![Actual running mapper with the V1 connected and Ace Combat 8 preset loaded](docs/assets/workspace-live.jpg)
+
+Actual screenshot of the running development build with the V1 connected. The v0.1.0 public download uses schematic controller artwork.
 
 ## What it does
 
@@ -15,7 +17,7 @@
 - Separate keyboard/mouse output. Driver setup and dependency notices are included; no Python installation is needed for release binaries.
 - Black interface, native dark Windows title bar, and compact menu-based tools.
 
-**Preview status:** not a universal compatibility guarantee. The owner has reported Ace Combat 8 working; that is not independent game certification. Other starters are proposed layouts and require verification in the game. Original V1 only; V2/Flightdeck/HOTAS models are not claimed compatible.
+**Game testing: Ace Combat 8 is the only game tested so far.** All other game presets are untested starting points. This is not a universal compatibility guarantee. Original V1 only; V2/Flightdeck/HOTAS models are not claimed compatible.
 
 ## Requirements
 
@@ -72,7 +74,7 @@ The fetch script pins hashes and checks Authenticode signatures; it never instal
 
 ## License and independence
 
-**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. Manufacturer photographs are excluded from every public asset and binary. The illustrations show the original V1 control layout; they are not manufacturer photographs or factory calibration.
+**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. Manufacturer photographs are excluded from the release binaries. The native development screenshot in this README shows the older photo-based interface. The illustrations show the original V1 control layout; they are not manufacturer photographs or factory calibration.
 
 Turtle Beach, VelocityOne and Xbox identify relevant hardware/interfaces and remain their owners' trademarks. This project is not endorsed by or affiliated with those manufacturers.
 

@@ -6,7 +6,7 @@ I built an independent, open-source Windows mapper for the original Turtle Beach
 
 It offers live input graphics, virtual Xbox or keyboard/mouse output, game-scoped presets, editable action labels and button-triggered macros. No x360ce or ViGEm dependency. Release downloads include the app runtime, VIIPER backend and USBIP driver installer; virtual Xbox output still requires explicit Windows driver installation and the documented Windows/runtime prerequisites.
 
-This is a preview for the original V1 in PC mode. Starter layouts are proposals to check in your game, not factory defaults or universal compatibility claims. The mapper is unsigned. Please read setup instructions and verify the release checksum before running it.
+This is a preview for the original V1 in PC mode. Ace Combat 8 is the only game tested so far. All other game presets are untested starting points, not verified compatibility claims. The mapper is unsigned. Please read setup instructions and verify the release checksum before running it.
 
 Download: https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.0
 Source/setup: https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1

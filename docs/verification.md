@@ -25,7 +25,7 @@ These tests establish bounded software behavior, not physical controller operati
 
 ## Rendered interface check
 
-![Offscreen workspace with original schematic artwork](assets/workspace.png)
+![Earlier offscreen verification render with original schematic artwork](assets/workspace.png)
 
 The actual Qt interface was rendered and visually inspected at **1640 Ã— 1000** with Segoe UI regular/bold fonts explicitly loaded. The screenshot uses the staged original schematic artwork and an isolated temporary AC8 user preset. The device and output engine were replaced with inert test doubles; the display correctly shows **V1 DISCONNECTED** and output stopped. No controller was polled and no gamepad, keyboard or mouse output was started for this screenshot.
 
@@ -39,7 +39,7 @@ Both the stripped portable and single-file executables rendered successfully wit
 
 ## Hardware, game and distribution limits
 
-- The owner reports Ace Combat 8 working and supplied the action names above. This is owner feedback, not an independent gameplay qualification. Other game starters are proposed mappings. Verify the selected game/control scheme and every output in the game before relying on a preset.
+- **Ace Combat 8 is the only game tested so far. All other game presets are untested.** The owner reports Ace Combat 8 working and supplied the action names above. This is owner feedback, not an independent gameplay qualification. Other game starters are proposed mappings. Verify the selected game/control scheme and every output in the game before relying on a preset.
 - Only the original VelocityOne Flightstick V1 is targeted. V2, Flightdeck, HOTAS and other models have not been qualified. Physical input numbering and direction must be confirmed on the actual controller. The schematic is not a factory calibration record.
 - No clean Windows-machine installation, first-time driver installation or restart/recovery check was performed. Portable execution on the installed development machine was checked as described above. Installed-development-machine tests cannot prove all release prerequisites are present elsewhere.
 - Driver signing, mapper executable signing, antivirus reputation, anti-cheat acceptance, game discovery and elevated-app input restrictions are separate distribution/runtime concerns. A passing suite or screenshot does not establish them. The mapper executable is currently unsigned.
@@ -49,3 +49,7 @@ Both the stripped portable and single-file executables rendered successfully wit
 Before a release is described as broadly qualified, exercise the actual release binaries on a clean supported Windows system, install the required driver through its normal flow, verify disconnect/stale-input behavior, and test each claimed game/control scheme with the intended original V1 hardware. Record versions and concrete results rather than treating an app launch as acceptance.
 
 
+
+## Public screenshot
+
+The README and project page now use `assets/workspace-live.jpg`, an unedited native screenshot of the running development app with the original V1 connected, the owner’s Ace Combat 8 preset loaded and output active. It was captured from the actual window, without mocked inputs. This development build contains photo artwork; the published v0.1.0 download uses schematic artwork. The earlier offscreen verification render above remains separately identified.
