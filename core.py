@@ -41,7 +41,12 @@ def evaluate(profile,state):
     out=dict(buttons=0,**{a:0. for a in AXES})
     if state is None:return out
     for target,src in profile['outputs'].items():
-        v=source_value(src,state,profile['deadzone'])
+        if target in AXES and src.get('kind')=='any':
+            values=[source_value(child,state,profile['deadzone']) for child in src['sources']]
+            # Preserve analog travel. Triggers use the highest positive value;
+            # signed sticks use greatest magnitude, with list order breaking ties.
+            v=max([0.,*values]) if target in ('LT','RT') else max(values,key=abs)
+        else:v=source_value(src,state,profile['deadzone'])
         if target in AXES:out[target]=max(0.,v) if target in ('LT','RT') else v
         elif v>.5:out['buttons']|=BUTTONS[target]
     combo=profile.get('combo')
@@ -75,7 +80,7 @@ def validate_profile(p):
         if target not in (*AXES,*BUTTONS):raise ValueError('Unknown output')
         if isinstance(s,dict) and s.get('kind')=='any':
             children=s.get('sources')
-            if target not in BUTTONS or not isinstance(children,list) or not 1<=len(children)<=32:raise ValueError('Use 1-32 alternative inputs for a digital output')
+            if not isinstance(children,list) or not 1<=len(children)<=32:raise ValueError('Use 1-32 alternative inputs for an output')
             for child in children:source(child)
         else:source(s)
     if p.get('combo') is not None and (type(p['combo']) is not int or not 0<=p['combo']<128):raise ValueError('Invalid combo button')

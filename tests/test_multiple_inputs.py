@@ -8,8 +8,9 @@ class MultipleInputTests(unittest.TestCase):
    s['buttons']=[i in pressed for i in range(24)];self.assertEqual(evaluate(p,s)['buttons'],wanted)
   self.assertEqual(evaluate(p,None)['buttons'],0)
  def test_invalid_alternatives(self):
-  for target,src in [('LX',{'kind':'any','sources':[{'kind':'button','index':1}]}),('L3',{'kind':'any','sources':[]}),('L3',{'kind':'any','sources':[{'kind':'any','sources':[]}]}),('L3',{'kind':'any','sources':[{'kind':'button','index':999}]})]:
+  for target,src in [('LX',{'kind':'any','sources':[{'kind':'button','index':1}]*33}),('L3',{'kind':'any','sources':[]}),('L3',{'kind':'any','sources':[{'kind':'any','sources':[]}]}),('L3',{'kind':'any','sources':[{'kind':'button','index':999}]})]:
    p=default_profile();p['outputs'][target]=src
    with self.assertRaises(ValueError):validate_profile(p)
  def test_existing_single_source_still_supported(self):
   p=default_profile();p['outputs']['L3']={'kind':'button','index':2};self.assertEqual(validate_profile(p)['outputs']['L3'],p['outputs']['L3'])
+

@@ -90,13 +90,20 @@ class SourceDialog(QDialog):
         self.learning=False;self.notice.setText('Captured '+source_text(self.source())+'. Review range and inversion, then OK.')
 
 class OutputInputsDialog(QDialog):
-    """Alternative sources for one digital output; edits apply only on OK."""
-    def __init__(self,title,provider,source=None,parent=None):
+    """Alternative sources for one gamepad output; edits apply only on OK."""
+    def __init__(self,title,provider,source=None,parent=None,output_target=None):
         super().__init__(parent);self.setWindowTitle(title+' • input assignments');self.resize(640,350)
         self.provider=provider
+        self.output_target=output_target
         self.sources=copy.deepcopy(source['sources'] if source and source.get('kind')=='any' else [source] if source else [])
         layout=QVBoxLayout(self)
-        note=QLabel('Any listed input activates this output (OR). Add your shared button and its independent button here.\nAssign the shared button to both L3 and R3 to click both sticks together.')
+        if output_target in ('LT','RT'):
+            help_text='Highest input wins, preserving proportional lever travel. A button gives 100%; releasing it returns to the lever position.'
+        elif output_target in ('LX','LY','RX','RY'):
+            help_text='Strongest input wins (greatest distance from center). Inputs are not added. Equal strength uses the first listed input. Buttons give full positive travel.'
+        else:
+            help_text='Any listed input activates this output (OR). Assign a shared button to both L3 and R3, then add independent buttons to each list.'
+        note=QLabel(help_text)
         note.setWordWrap(True);layout.addWidget(note)
         self.inputs=QListWidget();layout.addWidget(self.inputs,1)
         row=QHBoxLayout()
@@ -117,6 +124,7 @@ class OutputInputsDialog(QDialog):
     def add_input(self):
         if len(self.sources)>=32:return
         dialog=SourceDialog('Add physical input',self.provider,parent=self)
+        if self.output_target in ('LT','RT'):dialog.range.setCurrentText('full')
         if dialog.exec():self.sources.append(dialog.source());self.refresh_inputs()
     def edit_input(self):
         row=self.inputs.currentRow()

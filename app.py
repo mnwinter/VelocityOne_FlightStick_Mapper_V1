@@ -454,9 +454,7 @@ class MainWindow(QMainWindow):
             if result<=32:QMessageBox.warning(self,'Installer did not start',f'Windows error {result}')
     def map_output(self,target):
         self.stop();src=self.p['outputs'].get(target)
-        dialog_type=OutputInputsDialog if target in BUTTONS else SourceDialog
-        d=dialog_type(f'Map {target}',self.provider,src,self)
-        if not src and target in ('LT','RT'):d.range.setCurrentText('full')
+        d=OutputInputsDialog(f'Map {target}',self.provider,src,self,output_target=target)
         if d.exec():
             source=d.source()
             if source is None:self.p['outputs'].pop(target,None)
