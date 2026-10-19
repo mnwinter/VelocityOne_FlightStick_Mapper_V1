@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest a focused improvement.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What workflow needs improvement?
+      description: Describe the task and current limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and alternatives
+      description: Include device and game context. Clearly distinguish measured input identities from guesses.
+    validations:
+      required: true

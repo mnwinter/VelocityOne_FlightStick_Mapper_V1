@@ -1,0 +1,33 @@
+name: Bug report
+description: Report reproducible mapper behavior.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not upload credentials or unredacted personal logs. Automated tests do not establish driver or game compatibility."
+  - type: input
+    id: version
+    attributes:
+      label: Mapper release and Windows version
+      placeholder: v0.1.0, Windows 11 x64 build ...
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware, firmware and output mode
+      description: Original V1 in PC mode? Xbox or keyboard/mouse? Does Windows controller test show the virtual controller?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include the game/control scheme if relevant, and whether the raw input and mapped preview respond.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Optional redacted evidence
+      description: Screenshots, minimal profile or relevant log excerpt. Remove personal paths and information first.

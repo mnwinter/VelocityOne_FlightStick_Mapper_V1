@@ -1,0 +1,5 @@
+[
+  {"file":"viiper.exe","url":"https://github.com/Alia5/VIIPER/releases/download/v0.9.0/viiper-windows-amd64.exe","sha256":"142c144f6abee8b8a5f6a1abbc7018683444de71d2e45102cde6aaab9b2223e6","authenticode":true},
+  {"file":"USBip-0.9.8.1-x64.exe","url":"https://github.com/vadimgrn/usbip-win2/releases/download/v.0.9.8.1/USBip-0.9.8.1-x64.exe","sha256":"38cad6d4432b52d5bb9409d9ad03b72fdffc4ada4cd3a48fbeca1a2752a8518a","authenticode":true},
+  {"file":"VIIPER-v0.9.0-source.zip","url":"https://github.com/Alia5/VIIPER/archive/refs/tags/v0.9.0.zip","sha256":"303c9ca3613863dc8eb9fa432f092d70b3240c514d898920199afa68b5651918","authenticode":false}
+]
