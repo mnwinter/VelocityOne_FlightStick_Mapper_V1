@@ -1,4 +1,4 @@
-"""V1 schematic instrumentation and explicit source learning; no synthetic live data."""
+"""V1 image instrumentation and explicit source learning; no synthetic live data."""
 import copy,time
 from PySide6.QtCore import Qt,QTimer,QRectF,QPointF,Signal
 from PySide6.QtGui import QPainter,QPixmap,QColor,QPen,QFont
@@ -167,7 +167,7 @@ class ControllerView(QWidget):
         super().__init__();self.front_photo=QPixmap(str(path));self.top_photo=QPixmap(str(path.with_name('v1-top.png')))
         self.photo=self.front_photo;self.view_index=0;self.state=None;self.profile=None;self.points={};self.hit_rects={};self.hover_key=None
         self.setMinimumSize(320,240);self.setMouseTracking(True)
-        self.setToolTip('Click a physical control marker to learn its input. Illustration: original V1 control layout.\nLive overlays show measured input; the layout illustration is static.')
+        self.setToolTip('Click a physical control marker to learn its input. Image: original VelocityOne V1.\nLive overlays show measured input; the controller image is static.')
     def set_view(self,index):
         self.view_index=index;self.photo=self.front_photo if index==0 else self.top_photo
         self.points={};self.hit_rects={};self.hover_key=None;self.update()

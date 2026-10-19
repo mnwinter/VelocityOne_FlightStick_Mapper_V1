@@ -2,15 +2,15 @@
 
 **An independent Windows mapper for the original Turtle Beach VelocityOne Flightstick V1.** Map physical controls to a virtual Xbox gamepad or keyboard/mouse, see live inputs, and save setups by game. No x360ce or ViGEm.
 
-[Download preview v0.1.1](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.1) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
+[Download preview v0.1.2](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.2) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
 
 ![Actual running mapper with the V1 connected and Ace Combat 8 preset loaded](docs/assets/workspace-live.jpg)
 
-Actual screenshot of the running development build with the V1 connected. The v0.1.1 public download uses schematic controller artwork.
+Actual screenshot of the running app with the original V1 connected. v0.1.2 restores the real V1 controller images.
 
 ## What it does
 
-- Live V1 schematic with clickable controls, stick/twist motion, sliders, detents and button activity.
+- Live V1 controller image with clickable controls, stick/twist motion, sliders, detents and button activity.
 - Xbox control symbols with **editable game-action names**. Axis bars show proportional output; buttons show held state.
 - Game → user preset selection, 32 editable starter layouts across 16 flight/space titles, and preserved calibration.
 - Multiple physical inputs for each digital gamepad output: any listed input activates it.
@@ -28,7 +28,7 @@ The download includes Python, Qt/PySide6, pygame/SDL, VIIPER and the USBIP insta
 
 ## Quick start
 
-1. Download `VelocityOneMapper-v0.1.1-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
+1. Download `VelocityOneMapper-v0.1.2-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
 2. Connect the original stick in PC mode. Close other controller mappers to avoid duplicate input.
 3. Open **Tools → Driver setup / dependencies** for first-time virtual-controller setup.
 4. Select **Game**, then a starter or saved **Preset**. The app loads without autosaving over presets.
@@ -77,11 +77,11 @@ py -3.12 -m venv .venv
 .\build.ps1 -Python .\.venv\Scripts\python.exe -Kind portable
 ```
 
-The fetch script pins hashes and checks Authenticode signatures; it never installs or runs downloads. Build inputs include backend corresponding source. Tests run before packaging. `--data-dir PATH --render preview.png` renders offscreen using isolated data. Building original art additionally uses QtSvg: `python scripts/generate_v1_art.py`.
+The fetch script pins hashes and checks Authenticode signatures; it never installs or runs downloads. Build inputs include backend corresponding source. Tests run before packaging. `--data-dir PATH --render preview.png` renders offscreen using isolated data.
 
 ## License and independence
 
-**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. Manufacturer photographs are excluded from the release binaries. The native development screenshot in this README shows the older photo-based interface. The illustrations show the original V1 control layout; they are not manufacturer photographs or factory calibration.
+**GPL-3.0-only** for the mapper and its original artwork; see [LICENSE](LICENSE). Dependencies retain their licenses. [Notices and source links](THIRD_PARTY.md) are provided with the builds. The real V1 controller images are restored in v0.1.2 with redistribution permission confirmed by the project owner. Third-party images retain their copyright and are not licensed under the application GPL.
 
 Turtle Beach, VelocityOne and Xbox identify relevant hardware/interfaces and remain their owners' trademarks. This project is not endorsed by or affiliated with those manufacturers.
 

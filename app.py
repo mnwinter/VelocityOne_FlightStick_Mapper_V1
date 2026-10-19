@@ -381,7 +381,7 @@ class MainWindow(QMainWindow):
         row=QHBoxLayout();row.addWidget(button('+ Keyboard binding',lambda:self.add_desktop('keys')));row.addWidget(button('+ Mouse binding',lambda:self.add_desktop('mouse')));l.addLayout(row)
         self.desktop_list=QVBoxLayout();l.addLayout(self.desktop_list);l.addStretch()
     def build_physical(self,l):
-        n=label('Identify controls on the original V1 illustration. These assignments drive the live graphics, not game output.\nHidden controls can be identified from this list. OLED area is an illustrative reference.','muted');n.setWordWrap(True);l.addWidget(n)
+        n=label('Identify controls on the original V1 image. These assignments drive the live graphics, not game output.\nHidden controls can be identified from this list. OLED area is an illustrative reference.','muted');n.setWordWrap(True);l.addWidget(n)
         self.graphic_buttons={}
         for key,(name,_) in REGIONS.items():
             control=button(name,lambda checked=False,k=key:self.region_clicked(k))

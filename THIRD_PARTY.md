@@ -1,6 +1,6 @@
 # Third-party components and artwork
 
-This is an independent community application with no manufacturer affiliation or endorsement. Turtle Beach and VelocityOne are their owners' trademarks. Public controller artwork is an original schematic illustration. Release binaries use that original illustration. The README/project-page screenshot is a native capture of the earlier development app and shows its photo-based controller view; it is not the artwork shipped in v0.1.0. Third-party imagery is not relicensed under the mapper GPL.
+This is an independent community application with no manufacturer affiliation or endorsement. Turtle Beach and VelocityOne are their owners' trademarks. v0.1.2 restores the original V1 controller photographs with redistribution permission confirmed by the project owner. Those images retain their third-party copyright; the mapper GPL does not relicense them.
 
 The mapper is GPL-3.0 under the root LICENSE. Dependencies retain their respective terms. See [dependency source and replacement instructions](docs/dependency-sources.md). `licenses/dependency-inventory.json` records notice provenance and hashes; the final release binary manifest is separate. Notice collection is not a distribution certification.
 
@@ -15,8 +15,8 @@ Public binary builds omit copied Microsoft VC runtime, UCRT and API-set DLLs. Wi
 - **PySide6 / Qt 6.12**, Qt Widgets bindings. https://doc.qt.io/qtforpython-6/licenses.html . Applicable open-source license texts and component notices are included. Source and portable builds provide modification routes; see the dependency guide for remaining qualification.
 - **pygame-ce 2.5.8 / SDL2**, joystick input. https://pyga.me/docs/ref/joystick.html . pygame-ce LGPL-2.1; SDL zlib license. Package license texts included in `licenses`.
 - **Python 3.12** and **PyInstaller 6.22.3** supply the packaged runtime/bootloader, under their upstream license terms.
-- Manufacturer photographs from the official original-V1 product gallery were used only during earlier local development. They are excluded from rebuilt release binaries. The actual development-app screenshot in the README/project page shows that older photo-based view.
+- Original V1 controller photographs: included in v0.1.2 with redistribution permission confirmed by the project owner. Third-party copyright retained.
 
 No x360ce or ViGEm binary, client library, driver, or running process is required by this application. Existing installations are preserved.
 
-Release controller illustrations replace the earlier manufacturer photographs.
+The temporary schematic controller images used in v0.1.0/v0.1.1 have been replaced by the real original-V1 images.
