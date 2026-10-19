@@ -11,6 +11,8 @@ This is a preview for the original V1 in PC mode. Starter layouts are proposals 
 Download: https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.0
 Source/setup: https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1
 
+Thumbwheel setup: on the stick’s OLED, set **Trim Wheel → Response → Digital Buttons**, then Learn wheel up and down separately in the mapper. The wheel press is a separate Button 15 input.
+
 Feedback from original-V1 owners is welcome: share your mapper/Windows versions, firmware, game/control scheme, reproduction steps and what the raw/mapped monitors show. Redact personal information from evidence. Independent project; not affiliated with Turtle Beach or Microsoft. GPL-3.0-only.
 
 ## Suggested destinations

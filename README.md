@@ -32,6 +32,8 @@ The download includes Python, Qt/PySide6, pygame/SDL, VIIPER and the USBIP insta
 5. Click a binding box to learn/edit its physical input. Edit the action name beside the Xbox symbol. **File → Save preset (Ctrl+S)** saves your setup.
 6. Select **Xbox gamepad → Start output**. Confirm the virtual controller in **Tools → Windows controller test**, then verify each game binding.
 
+**Thumbwheel setup:** On the flightstick's OLED, change **Trim Wheel → Response → Digital Buttons** so wheel up/down can be learned as separate button inputs. In the mapper, use Learn for each direction and save the preset. Pressing the wheel is a separate input, **Button 15**.
+
 Stop output before editing or leaving the app. **Ctrl+Alt+F12** is the emergency stop while the UI loop is responsive. Closing with unsaved changes offers Save/Discard/Cancel. Disconnect/stalled input stops output; reconnecting does not automatically restart it.
 
 ## Menus and controls
