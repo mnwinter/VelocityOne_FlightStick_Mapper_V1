@@ -22,4 +22,4 @@ class StartupRestoreTests(unittest.TestCase):
    with patch.object(app,'ROOT',root):app.MainWindow.restore_profile(fake)
    self.assertEqual(fake.load_path.call_count,2)
    fake.load_path.assert_any_call(bad.resolve(),save_pending=False)
-   fake.load_path.assert_called_with(good,save_pending=False)
+   fake.load_path.assert_called_with(good.resolve(),save_pending=False)
