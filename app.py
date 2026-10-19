@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (QApplication,QMainWindow,QWidget,QVBoxLayout,QHBo
 from core import default_profile,validate_profile,evaluate,source_value,AXES,BUTTONS
 from input_device import Flightstick
 from engine import Engine
-from widgets import ControllerView,AxisMeter,ButtonMonitor,SourceDialog,source_text,REGIONS,THUMBWHEEL_SETUP
+from widgets import ControllerView,AxisMeter,ButtonMonitor,SourceDialog,source_text,REGIONS,THUMBWHEEL_SETUP,OutputInputsDialog
 from calibration import apply_calibration,clear_unverified_levers
 from calibration_dialog import CalibrationDialog
 from macro_dialog import MacroDialog
@@ -448,9 +448,16 @@ class MainWindow(QMainWindow):
             result=ctypes.windll.shell32.ShellExecuteW(None,'open',str(exe),None,str(exe.parent),1)
             if result<=32:QMessageBox.warning(self,'Installer did not start',f'Windows error {result}')
     def map_output(self,target):
-        self.stop();src=self.p['outputs'].get(target);d=SourceDialog(f'Map {target}',self.provider,src,self)
+        self.stop();src=self.p['outputs'].get(target)
+        dialog_type=OutputInputsDialog if target in BUTTONS else SourceDialog
+        d=dialog_type(f'Map {target}',self.provider,src,self)
         if not src and target in ('LT','RT'):d.range.setCurrentText('full')
-        if d.exec():self.p['outputs'][target]=d.source();self.refresh()
+        if d.exec():
+            source=d.source()
+            if source is None:self.p['outputs'].pop(target,None)
+            else:self.p['outputs'][target]=source
+            self.refresh()
+        d.deleteLater()
     def clear_output(self,target):self.stop();self.p['outputs'].pop(target,None);self.refresh()
     def learn_combo(self):
         self.stop();d=SourceDialog('Combined LT + RT button',self.provider,{'kind':'button','index':self.p['combo']} if self.p['combo'] is not None else None,self,True)
@@ -492,7 +499,7 @@ class MainWindow(QMainWindow):
             title.setToolTip('Edit game action: '+(role or target)+' • '+target+' • Save preset with Ctrl+S')
         self.macro_button.setText(f"Macros ({len(self.p.get('macros',[]))})…")
         for t,b in self.rows.items():
-            text=source_text(self.p['outputs'].get(t));b.setProperty('mappingText',text);b.setText(text)
+            text=source_text(self.p['outputs'].get(t));b.setProperty('mappingText',text);b.setText(text);b.setToolTip(text+' - click to edit physical inputs')
         self.update_assignment_activity(evaluate(self.p,self.state))
         c=self.p.get('combo');self.combo_label.setText('Unassigned • set via Mappings menu' if c is None else f'Button {c+1} → LT + RT • release restores levers')
         while self.desktop_list.count():

@@ -3,7 +3,7 @@ import copy,time
 from PySide6.QtCore import Qt,QTimer,QRectF,QPointF,Signal
 from PySide6.QtGui import QPainter,QPixmap,QColor,QPen,QFont
 from PySide6.QtWidgets import (QWidget,QDialog,QVBoxLayout,QHBoxLayout,QLabel,QComboBox,
-    QSpinBox,QCheckBox,QPushButton,QDialogButtonBox,QFormLayout)
+    QSpinBox,QCheckBox,QPushButton,QDialogButtonBox,QFormLayout,QListWidget)
 from core import source_value
 from overlay_bindings import front_marker_slots
 
@@ -16,6 +16,7 @@ THUMBWHEEL_SETUP = (
 
 def source_text(s):
     if not s:return 'Unassigned'
+    if s.get('kind')=='any':return ' OR '.join(source_text(child) for child in s['sources'])
     text=f"{s['kind'].title()} {s['index']+1}"
     if s['kind']=='axis':text+=' · '+s.get('range','signed')+(' · inverted' if s.get('invert') else '')
     if s['kind']=='hat':text+=' · '+s.get('direction','up')
@@ -87,6 +88,47 @@ class SourceDialog(QDialog):
                         self.direction.setCurrentText('up' if y>0 else 'down' if y<0 else 'right' if x>0 else 'left');break
                 else:return
         self.learning=False;self.notice.setText('Captured '+source_text(self.source())+'. Review range and inversion, then OK.')
+
+class OutputInputsDialog(QDialog):
+    """Alternative sources for one digital output; edits apply only on OK."""
+    def __init__(self,title,provider,source=None,parent=None):
+        super().__init__(parent);self.setWindowTitle(title+' • input assignments');self.resize(640,350)
+        self.provider=provider
+        self.sources=copy.deepcopy(source['sources'] if source and source.get('kind')=='any' else [source] if source else [])
+        layout=QVBoxLayout(self)
+        note=QLabel('Any listed input activates this output (OR). Add your shared button and its independent button here.\nAssign the shared button to both L3 and R3 to click both sticks together.')
+        note.setWordWrap(True);layout.addWidget(note)
+        self.inputs=QListWidget();layout.addWidget(self.inputs,1)
+        row=QHBoxLayout()
+        self.add_button=QPushButton('Add input...');self.edit_button=QPushButton('Edit selected...');self.remove_button=QPushButton('Remove selected')
+        for control,handler in ((self.add_button,self.add_input),(self.edit_button,self.edit_input),(self.remove_button,self.remove_input)):
+            row.addWidget(control);control.clicked.connect(handler)
+        layout.addLayout(row)
+        buttons=QDialogButtonBox(QDialogButtonBox.StandardButton.Ok|QDialogButtonBox.StandardButton.Cancel)
+        buttons.accepted.connect(self.accept);buttons.rejected.connect(self.reject);layout.addWidget(buttons)
+        self.inputs.currentRowChanged.connect(self.selection_changed);self.refresh_inputs()
+    def refresh_inputs(self):
+        selected=self.inputs.currentRow();self.inputs.clear();self.inputs.addItems([source_text(s) for s in self.sources])
+        if self.sources:self.inputs.setCurrentRow(max(0,min(selected,len(self.sources)-1)))
+        self.add_button.setEnabled(len(self.sources)<32);self.selection_changed()
+    def selection_changed(self,*_):
+        valid=0<=self.inputs.currentRow()<len(self.sources)
+        self.edit_button.setEnabled(valid);self.remove_button.setEnabled(valid)
+    def add_input(self):
+        if len(self.sources)>=32:return
+        dialog=SourceDialog('Add physical input',self.provider,parent=self)
+        if dialog.exec():self.sources.append(dialog.source());self.refresh_inputs()
+    def edit_input(self):
+        row=self.inputs.currentRow()
+        if not 0<=row<len(self.sources):return
+        dialog=SourceDialog('Edit physical input',self.provider,self.sources[row],self)
+        if dialog.exec():self.sources[row]=dialog.source();self.refresh_inputs()
+    def remove_input(self):
+        row=self.inputs.currentRow()
+        if 0<=row<len(self.sources):self.sources.pop(row);self.refresh_inputs()
+    def source(self):
+        if not self.sources:return None
+        return copy.deepcopy(self.sources[0] if len(self.sources)==1 else dict(kind='any',sources=self.sources))
 
 # Illustration coordinates refer to the original 2400×1350 V1 top photograph.
 # Clickable labels are physical regions; sources must be learned rather than guessed.

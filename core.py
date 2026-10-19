@@ -20,6 +20,8 @@ def axis_value(value,deadzone=0,invert=False):
 
 def source_value(src,state,deadzone=0):
     if not src or state is None:return 0.
+    if src.get('kind')=='any':
+        return float(any(source_value(child,state,deadzone)>.5 for child in src.get('sources',[])))
     i=src['index'];kind=src['kind']
     try:
         if kind=='button':return float(bool(state['buttons'][i]))
@@ -71,7 +73,11 @@ def validate_profile(p):
     if not isinstance(p.get('outputs'),dict):raise ValueError('Missing mappings')
     for target,s in p['outputs'].items():
         if target not in (*AXES,*BUTTONS):raise ValueError('Unknown output')
-        source(s)
+        if isinstance(s,dict) and s.get('kind')=='any':
+            children=s.get('sources')
+            if target not in BUTTONS or not isinstance(children,list) or not 1<=len(children)<=32:raise ValueError('Use 1-32 alternative inputs for a digital output')
+            for child in children:source(child)
+        else:source(s)
     if p.get('combo') is not None and (type(p['combo']) is not int or not 0<=p['combo']<128):raise ValueError('Invalid combo button')
     if not isinstance(p.get('physical',{}),dict):raise ValueError('Invalid graphic assignments')
     for s in p.get('physical',{}).values():source(s)

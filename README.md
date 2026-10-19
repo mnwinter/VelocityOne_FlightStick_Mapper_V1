@@ -2,17 +2,18 @@
 
 **An independent Windows mapper for the original Turtle Beach VelocityOne Flightstick V1.** Map physical controls to a virtual Xbox gamepad or keyboard/mouse, see live inputs, and save setups by game. No x360ce or ViGEm.
 
-[Download preview v0.1.0](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.0) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
+[Download preview v0.1.1](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/releases/tag/v0.1.1) · [Setup](#quick-start) · [Report a bug](https://github.com/mnwinter/VelocityOne_FlightStick_Mapper_V1/issues/new/choose) · [Project site](https://mnwinter.github.io/VelocityOne_FlightStick_Mapper_V1/)
 
 ![Actual running mapper with the V1 connected and Ace Combat 8 preset loaded](docs/assets/workspace-live.jpg)
 
-Actual screenshot of the running development build with the V1 connected. The v0.1.0 public download uses schematic controller artwork.
+Actual screenshot of the running development build with the V1 connected. The v0.1.1 public download uses schematic controller artwork.
 
 ## What it does
 
 - Live V1 schematic with clickable controls, stick/twist motion, sliders, detents and button activity.
 - Xbox control symbols with **editable game-action names**. Axis bars show proportional output; buttons show held state.
 - Game → user preset selection, 32 editable starter layouts across 16 flight/space titles, and preserved calibration.
+- Multiple physical inputs for each digital gamepad output: any listed input activates it.
 - Macros with ordered steps, simultaneous outputs, hold durations, delays, repeat count, while-held and toggle modes.
 - Separate keyboard/mouse output. Driver setup and dependency notices are included; no Python installation is needed for release binaries.
 - Black interface, native dark Windows title bar, and compact menu-based tools.
@@ -27,7 +28,7 @@ The download includes Python, Qt/PySide6, pygame/SDL, VIIPER and the USBIP insta
 
 ## Quick start
 
-1. Download `VelocityOneMapper-v0.1.0-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
+1. Download `VelocityOneMapper-v0.1.1-Windows-x64.exe`, or extract the portable ZIP and keep its whole folder together. Portable libraries remain replaceable.
 2. Connect the original stick in PC mode. Close other controller mappers to avoid duplicate input.
 3. Open **Tools → Driver setup / dependencies** for first-time virtual-controller setup.
 4. Select **Game**, then a starter or saved **Preset**. The app loads without autosaving over presets.
@@ -49,6 +50,12 @@ Stop output before editing or leaving the app. **Ctrl+Alt+F12** is the emergency
 For Ace Combat 8, owner-confirmed action names are **B: Fire secondary**, **X: Cycle weapons**, **Y: Change target**; **LB/RB** are rudder/yaw and **RX/RY** are look. Starters route negative/positive twist to LB/RB. Those are digital buttons, so they engage after the mapped threshold, not proportional rudder axes. Learn physical button numbers for your preferences.
 
 For wheel up/down pulses, set the stick OLED's **Trim Wheel → Response → Digital Buttons**, then Learn each direction. The wheel-press dot represents Button 15; separate rotation overlay markers are not implemented. Do not infer up/down from the press marker.
+
+## Multiple buttons for one output
+
+Click the binding box under **L3 / Auxiliary action 1** or **R3 / Auxiliary action 2**. Use **Add input…** to Learn each additional physical button; use Edit/Remove to change the list. Click OK, then **Ctrl+S**. Any listed input activates the output; commas in the action-name field do not create bindings.
+
+For a shared stick-click button plus independent clicks, assign the shared button to both L3 and R3, then add a different independent button to each list. Releasing one source does not release the output while another source remains held. Existing single-input presets continue to load. This alternative-input list is for digital outputs, not analog-axis mixing.
 
 ## Profiles, macros and troubleshooting
 
